@@ -1,6 +1,7 @@
 package com.giancarlohaack.cursoudemy01.resources;
 
 import com.giancarlohaack.cursoudemy01.domain.Categoria;
+import com.giancarlohaack.cursoudemy01.dto.CategoriaDTO;
 import com.giancarlohaack.cursoudemy01.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value="/categorias")
@@ -46,6 +48,13 @@ public class CategoriaResource {
     public ResponseEntity delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity findAll() {
+        List<Categoria> list = service.findAll();
+        List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 
 }

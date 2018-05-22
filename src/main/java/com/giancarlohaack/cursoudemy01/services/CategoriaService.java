@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +43,10 @@ public class CategoriaService {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
         }
+    }
+
+    public List<Categoria> findAll() {
+        return categoriaRepository.findAll();
     }
 
 }
