@@ -2,8 +2,10 @@ package com.giancarlohaack.cursoudemy01.services;
 
 import com.giancarlohaack.cursoudemy01.domain.Categoria;
 import com.giancarlohaack.cursoudemy01.repositories.CategoriaRepository;
+import com.giancarlohaack.cursoudemy01.services.exceptions.DataIntegrityException;
 import com.giancarlohaack.cursoudemy01.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -31,6 +33,15 @@ public class CategoriaService {
     public Categoria update(Categoria obj) {
         find(obj.getId()); //Verificar se existe, se nao lança excecao
         return categoriaRepository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        find(id);
+        try {
+            categoriaRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
+        }
     }
 
 }
