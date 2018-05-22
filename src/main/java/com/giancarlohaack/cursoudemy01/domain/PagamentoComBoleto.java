@@ -2,8 +2,10 @@ package com.giancarlohaack.cursoudemy01.domain;
 
 import com.giancarlohaack.cursoudemy01.domain.enums.EstadoPagamento;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 public class PagamentoComBoleto extends Pagamento {
     private static final long serialVersionUID = 1L;
 
