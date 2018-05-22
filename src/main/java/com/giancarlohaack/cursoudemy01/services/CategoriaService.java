@@ -23,4 +23,9 @@ public class CategoriaService {
         );
     }
 
+    public Categoria insert(Categoria obj) {
+        //obj.setId(null); //Segundo o professor, é pra garantir que sempre será um objeto novo.
+        return categoriaRepository.save(obj);
+    }
+
 }
