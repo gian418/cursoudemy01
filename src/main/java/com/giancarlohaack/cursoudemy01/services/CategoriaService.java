@@ -1,6 +1,7 @@
 package com.giancarlohaack.cursoudemy01.services;
 
 import com.giancarlohaack.cursoudemy01.domain.Categoria;
+import com.giancarlohaack.cursoudemy01.dto.CategoriaDTO;
 import com.giancarlohaack.cursoudemy01.repositories.CategoriaRepository;
 import com.giancarlohaack.cursoudemy01.services.exceptions.DataIntegrityException;
 import com.giancarlohaack.cursoudemy01.services.exceptions.ObjectNotFoundException;
@@ -55,6 +56,10 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO objDTO) {
+        return new Categoria(objDTO.getId(), objDTO.getNome());
     }
 
 }
