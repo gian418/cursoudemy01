@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +31,12 @@ public class ClienteService {
         );
     }
 
+//    @Transactional
 //    public Cliente insert(Cliente obj) {
 //        obj.setId(null); //Segundo o professor, é pra garantir que sempre será um objeto novo.
-//        return ClienteRepository.save(obj);
+//        obj = clienteRepository.save(obj);
+//        enderecoRepository.saveAll(obj.getEnderecos());
+//        return obj;
 //    }
 
     public Cliente update(Cliente obj) {
