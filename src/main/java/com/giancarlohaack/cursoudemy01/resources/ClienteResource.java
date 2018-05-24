@@ -1,14 +1,19 @@
 package com.giancarlohaack.cursoudemy01.resources;
 
+import com.giancarlohaack.cursoudemy01.domain.Categoria;
 import com.giancarlohaack.cursoudemy01.domain.Cliente;
+import com.giancarlohaack.cursoudemy01.dto.CategoriaDTO;
 import com.giancarlohaack.cursoudemy01.dto.ClienteDTO;
+import com.giancarlohaack.cursoudemy01.dto.ClienteNewDTO;
 import com.giancarlohaack.cursoudemy01.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,5 +64,17 @@ public class ClienteResource {
 
         return ResponseEntity.ok().body(listDTO);
     }
+
+//    @RequestMapping(method = RequestMethod.POST)
+//    public ResponseEntity insert(@Valid @RequestBody ClienteNewDTO objDto) {
+//        Cliente obj = service.fromDTO(objDto);
+//        obj = service.insert(obj);
+//        URI uri = ServletUriComponentsBuilder
+//                .fromCurrentRequest().path("/{id}")
+//                .buildAndExpand(obj.getId())
+//                .toUri();
+//
+//        return ResponseEntity.created(uri).build();
+//    }
 
 }
