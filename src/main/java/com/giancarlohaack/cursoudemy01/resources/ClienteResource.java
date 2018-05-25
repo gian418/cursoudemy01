@@ -65,16 +65,16 @@ public class ClienteResource {
         return ResponseEntity.ok().body(listDTO);
     }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity insert(@Valid @RequestBody ClienteNewDTO objDto) {
-//        Cliente obj = service.fromDTO(objDto);
-//        obj = service.insert(obj);
-//        URI uri = ServletUriComponentsBuilder
-//                .fromCurrentRequest().path("/{id}")
-//                .buildAndExpand(obj.getId())
-//                .toUri();
-//
-//        return ResponseEntity.created(uri).build();
-//    }
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity insert(@Valid @RequestBody ClienteNewDTO objDto) {
+        Cliente obj = service.fromDTO(objDto);
+        obj = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(obj.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).build();
+    }
 
 }
