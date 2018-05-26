@@ -1,5 +1,7 @@
 package com.giancarlohaack.cursoudemy01.dto;
 
+import com.giancarlohaack.cursoudemy01.domain.Produto;
+
 import java.io.Serializable;
 
 public class ProdutoDTO implements Serializable {
@@ -10,6 +12,12 @@ public class ProdutoDTO implements Serializable {
     private Double preco;
 
     public ProdutoDTO(){}
+
+    public ProdutoDTO(Produto obj) {
+        this.id = obj.getId();
+        this.nome = obj.getNome();
+        this.preco = obj.getPreco();
+    }
 
     public Integer getId() {
         return id;
