@@ -1,6 +1,8 @@
 package com.giancarlohaack.cursoudemy01.config;
 
 import com.giancarlohaack.cursoudemy01.services.DBService;
+import com.giancarlohaack.cursoudemy01.services.EmailService;
+import com.giancarlohaack.cursoudemy01.services.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +20,11 @@ public class TestConfig {
     @Bean
     public boolean instantiateDatabase() throws ParseException {
         dbService.instantiateTestDatabase();
-
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+        return new MockEmailService();
     }
 }
