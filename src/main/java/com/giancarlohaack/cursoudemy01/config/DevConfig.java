@@ -2,6 +2,7 @@ package com.giancarlohaack.cursoudemy01.config;
 
 import com.giancarlohaack.cursoudemy01.services.DBService;
 import com.giancarlohaack.cursoudemy01.services.EmailService;
+import com.giancarlohaack.cursoudemy01.services.MockEmailService;
 import com.giancarlohaack.cursoudemy01.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,5 +34,6 @@ public class DevConfig {
     @Bean
     public EmailService emailService() {
         return new SmtpEmailService();
+        //return new MockEmailService();
     }
 }
