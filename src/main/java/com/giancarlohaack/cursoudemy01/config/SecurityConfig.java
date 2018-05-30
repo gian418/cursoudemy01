@@ -1,6 +1,7 @@
 package com.giancarlohaack.cursoudemy01.config;
 
 import com.giancarlohaack.cursoudemy01.security.JWTAthenticationFilter;
+import com.giancarlohaack.cursoudemy01.security.JWTAuthorizationFilter;
 import com.giancarlohaack.cursoudemy01.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -60,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated();
 
         http.addFilter(new JWTAthenticationFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
