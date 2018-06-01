@@ -4,12 +4,15 @@ import com.giancarlohaack.cursoudemy01.domain.Cidade;
 import com.giancarlohaack.cursoudemy01.domain.Cliente;
 import com.giancarlohaack.cursoudemy01.domain.Cliente;
 import com.giancarlohaack.cursoudemy01.domain.Endereco;
+import com.giancarlohaack.cursoudemy01.domain.enums.Perfil;
 import com.giancarlohaack.cursoudemy01.domain.enums.TipoCliente;
 import com.giancarlohaack.cursoudemy01.dto.ClienteDTO;
 import com.giancarlohaack.cursoudemy01.dto.ClienteNewDTO;
 import com.giancarlohaack.cursoudemy01.repositories.CidadeRepository;
 import com.giancarlohaack.cursoudemy01.repositories.ClienteRepository;
 import com.giancarlohaack.cursoudemy01.repositories.EnderecoRepository;
+import com.giancarlohaack.cursoudemy01.security.UserSS;
+import com.giancarlohaack.cursoudemy01.services.exceptions.AuthorizationException;
 import com.giancarlohaack.cursoudemy01.services.exceptions.DataIntegrityException;
 import com.giancarlohaack.cursoudemy01.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,12 @@ public class ClienteService {
     private BCryptPasswordEncoder pe;
 
     public Cliente find(Integer id){
+
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
+
         Optional<Cliente> obj = clienteRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()

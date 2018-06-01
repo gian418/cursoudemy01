@@ -1,5 +1,6 @@
 package com.giancarlohaack.cursoudemy01.resources.exceptions;
 
+import com.giancarlohaack.cursoudemy01.services.exceptions.AuthorizationException;
 import com.giancarlohaack.cursoudemy01.services.exceptions.DataIntegrityException;
 import com.giancarlohaack.cursoudemy01.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,17 @@ public class ResourceExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+        StandardError err = new StandardError(
+                HttpStatus.FORBIDDEN.value(),
+                e.getMessage(),
+                System.currentTimeMillis()
+        );
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
 
 }
