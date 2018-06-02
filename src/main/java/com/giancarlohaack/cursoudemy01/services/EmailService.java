@@ -1,5 +1,6 @@
 package com.giancarlohaack.cursoudemy01.services;
 
+import com.giancarlohaack.cursoudemy01.domain.Cliente;
 import com.giancarlohaack.cursoudemy01.domain.Pedido;
 
 import javax.mail.internet.MimeMessage;
@@ -13,5 +14,6 @@ public interface EmailService {
     
     void sendOrderConfirmationHtmlEmail(Pedido obj);
     void sendHtmlEmail(MimeMessage msg);
+    void sendNewPasswordEmail(Cliente cliente, String newPass);
 
 }
