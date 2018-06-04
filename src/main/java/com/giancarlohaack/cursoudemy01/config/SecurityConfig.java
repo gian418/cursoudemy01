@@ -49,6 +49,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/**",
+                "/swagger-ui.html",
+                "/webjars/**"
+        );
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
